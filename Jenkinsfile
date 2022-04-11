@@ -22,5 +22,19 @@ pipeline {
                 }
             }
         }
+        stage('CentOS 8') {
+            agent any
+            steps {
+                sshagent(credentials : ['phaka']) {
+                    sh 'scp -o StrictHostKeyChecking=no patch.sh phaka@192.168.128.250:~/'
+                    sh 'ssh -o StrictHostKeyChecking=no phaka@192.168.128.250 chmod u+x patch.sh'
+                    sh 'ssh -o StrictHostKeyChecking=no phaka@192.168.128.250 sudo ./patch.sh'
+                    sleep 30
+                    sh 'scp -o StrictHostKeyChecking=no bootstrap.sh phaka@192.168.128.250:~/'
+                    sh 'ssh -o StrictHostKeyChecking=no phaka@192.168.128.250 chmod u+x bootstrap.sh'
+                    sh 'ssh -o StrictHostKeyChecking=no phaka@192.168.128.250 sudo ./bootstrap.sh'
+                }
+            }
+        }
     }
 }
