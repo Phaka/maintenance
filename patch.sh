@@ -8,12 +8,7 @@ yum check-update
 retVal=$?
 if [ $retVal -eq 100 ]; then 
     yum update -y
-    needs-restarting
-    retVal=$?
-    if [ $retVal -eq 1 ]; then 
-        echo "Rebooting"
-        shutdown -r +1
-    fi
+    shutdown -r +1
 else
     echo "System is up-to-date"
 fi
