@@ -9,7 +9,10 @@ pipeline {
     agent none
     stages {
         stage('CentOS 7') {
-            echo 'Running Maintenance Tasks'
+            agent any
+            steps {
+                echo 'Maintenance'
+            }
         }
     }
 }
