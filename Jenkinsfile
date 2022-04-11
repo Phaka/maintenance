@@ -12,8 +12,9 @@ pipeline {
             agent any
             steps {
                 sshagent(credentials : ['phaka']) {
-                    sh 'ssh -o StrictHostKeyChecking=no phaka@192.168.128.249 sudo yum check-update'
-                    sh 'ssh -o StrictHostKeyChecking=no phaka@192.168.128.249 sudo yum update'
+                    sh 'scp -o StrictHostKeyChecking=no patch.sh phaka@192.168.128.249:~/'
+                    sh 'ssh -o StrictHostKeyChecking=no phaka@192.168.128.249 chmod+x patch.sh'
+                    sh 'ssh -o StrictHostKeyChecking=no phaka@192.168.128.249 sudo ./patch.sh'
                 }
             }
         }
