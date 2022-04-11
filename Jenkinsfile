@@ -11,7 +11,9 @@ pipeline {
         stage('CentOS 7') {
             agent any
             steps {
-                echo 'Maintenance'
+                sshagent(credentials : ['phaka']) {
+                    sh 'ssh -o StrictHostKeyChecking=no phaka@192.168.128.249 uptime'
+                }
             }
         }
     }
