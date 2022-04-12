@@ -7,8 +7,8 @@ case $OS in
     OS='Linux'
     if [ -f /etc/os-release ]; then
         . /etc/os-release
-        case $(NAME | tr '[:upper:]' '[:lower:]') in
-        'centos')
+        case $NAME in
+        CentOS*)
             echo "CentOS"
             ;;
         *) 
