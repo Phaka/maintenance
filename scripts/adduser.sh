@@ -6,7 +6,7 @@ PASSWORD=$2
 OS="`uname`"
 case $OS in
   'Linux')
-    id -u jenkins &>/dev/null || useradd --create-home --user-group $USERNAME
+    id -u "$USERNAME" &>/dev/null || useradd --create-home --user-group $USERNAME
     echo "$USERNAME:$PASSWORD" | chpasswd
     ;;
   'FreeBSD')
