@@ -7,6 +7,14 @@ case $OS in
     OS='Linux'
     if [ -f /etc/os-release ]; then
         . /etc/os-release
+        case $(NAME | tr '[:upper:]' '[:lower:]') in
+        'centos')
+            echo "CentOS"
+            ;;
+        *) 
+            echo "Unknown Linux Distro: $NAME"
+            ;;
+        esac
         echo $NAME
         echo $VERSION_ID
     fi
