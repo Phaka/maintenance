@@ -21,8 +21,9 @@ pipeline {
                         agent any
                         steps {
                             sshagent(credentials : ['phaka']) {
-                                sh "ssh -o StrictHostKeyChecking=no phaka@${HOST} uname -s"
-                                sh "ssh -o StrictHostKeyChecking=no phaka@${HOST} uname -m"
+                                sh "scp -o StrictHostKeyChecking=no sysinfo.sh phaka@${HOST}:~/"
+                                sh "ssh -o StrictHostKeyChecking=no phaka@${HOST} chmod u+x sysinfo.sh"
+                                sh "ssh -o StrictHostKeyChecking=no phaka@${HOST} sudo ./sysinfo.sh"
                             }
                         }
                     }
@@ -30,7 +31,6 @@ pipeline {
                         agent any
                         steps {
                             sshagent(credentials : ['phaka']) {
-                                sh "ssh -o StrictHostKeyChecking=no phaka@${HOST} uname"
                                 sh "scp -o StrictHostKeyChecking=no bootstrap.sh phaka@${HOST}:~/"
                                 sh "ssh -o StrictHostKeyChecking=no phaka@${HOST} chmod u+x bootstrap.sh"
                                 sh "ssh -o StrictHostKeyChecking=no phaka@${HOST} sudo ./bootstrap.sh"
