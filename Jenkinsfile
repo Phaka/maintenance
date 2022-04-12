@@ -7,13 +7,17 @@ pipeline {
         cron '0 7 * * *'
     }
     agent none
+    environment {
+        AGENT = credentials('agent')
+    }
     stages {
         stage('Linux') {
             matrix {
                 axes {
                     axis {
-                        name 'HOST'
-                        values '192.168.128.249', '192.168.128.245'
+                        name    'HOST'
+                        values  '192.168.128.249', // CentOS 7
+                                '192.168.128.245'  // Debian 10
                     }
                 }
                 stages {
@@ -21,11 +25,10 @@ pipeline {
                         agent any
                         steps {
                             sshagent(credentials : ['phaka']) {
-                                sh "scp -o StrictHostKeyChecking=no maintenance.sh phaka@${HOST}:~/"
-                                sh "ssh -o StrictHostKeyChecking=no phaka@${HOST} chmod u+x maintenance.sh"
-                                sh "ssh -o StrictHostKeyChecking=no phaka@${HOST} sudo ./maintenance.sh"
-                                sh "ssh -o StrictHostKeyChecking=no phaka@${HOST} echo \"jenkins:J3nkins!\" | sudo chpasswd"
-                                sh "ssh -o StrictHostKeyChecking=no phaka@${HOST} rm ./maintenance.sh"
+                                sh "scp -o StrictHostKeyChecking=no scripts phaka@${HOST}:~/"
+                                sh "ssh -o StrictHostKeyChecking=no phaka@${HOST} chmod u+x scripts/maintenance.sh"
+                                sh "ssh -o StrictHostKeyChecking=no phaka@${HOST} sudo scripts/maintenance.sh"
+                                sh "ssh -o StrictHostKeyChecking=no phaka@${HOST} rm -Rf scripts"
                             }
                         }
                     }
