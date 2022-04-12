@@ -25,10 +25,12 @@ pipeline {
                         agent any
                         steps {
                             sshagent(credentials : ['phaka']) {
-                                sh "scp -o StrictHostKeyChecking=no scripts phaka@${HOST}:~/"
-                                sh "ssh -o StrictHostKeyChecking=no phaka@${HOST} chmod u+x scripts/maintenance.sh"
-                                sh "ssh -o StrictHostKeyChecking=no phaka@${HOST} sudo scripts/maintenance.sh"
                                 sh "ssh -o StrictHostKeyChecking=no phaka@${HOST} rm -Rf scripts"
+                                sh "scp -o StrictHostKeyChecking=no scripts phaka@${HOST}:~/"
+                                sh "ssh -o StrictHostKeyChecking=no phaka@${HOST} chmod u+x scripts/*.sh"
+                                sh "ssh -o StrictHostKeyChecking=no phaka@${HOST} sudo scripts/adduser.sh"
+                                sh "ssh -o StrictHostKeyChecking=no phaka@${HOST} sudo scripts/maintenance.sh"
+                                sh "ssh -o StrictHostKeyChecking=no phaka@${HOST} sudo scripts/reboot.sh"
                             }
                         }
                     }

@@ -19,7 +19,6 @@ el7() {
     retVal=$?
     if [ $retVal -eq 100 ]; then 
         yum update -y
-        shutdown -r +1
     else
         echo "System is up-to-date"
     fi
@@ -44,7 +43,6 @@ el9()  {
     retVal=$?
     if [ $retVal -eq 100 ]; then 
         dnf upgrade --allowerasing -y
-        shutdown -r +1
     else
         echo "System is up-to-date"
     fi
@@ -63,9 +61,7 @@ deb() {
     echo "System is up-to-date"
   else
     apt upgrade -y
-    shutdown -r +1
   fi
-
 }
 
 OS="`uname`"
