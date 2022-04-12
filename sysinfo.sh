@@ -18,7 +18,7 @@ el9()  {
     dnf group install "Development Tools" -y
     dnf install cmake -y
     dnf install java-11-openjdk -y
-    dnf check-update
+    dnf check-update -y
     retVal=$?
     if [ $retVal -eq 100 ]; then 
         dnf upgrade -y
@@ -29,7 +29,7 @@ el9()  {
 }
 
 el8()  {
-    dnf --disablerepo '*' --enablerepo=extras swap centos-linux-repos centos-stream-repos
+    dnf --disablerepo '*' --enablerepo=extras swap centos-linux-repos centos-stream-repos -y
     el9
 }
 
