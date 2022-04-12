@@ -9,14 +9,25 @@ case $OS in
         . /etc/os-release
         case $NAME in
         CentOS*)
-            echo "CentOS"
+            case $VERSION_ID in
+            6)
+                echo "!!CentOS 6"
+                ;;
+            7)
+                echo "!!CentOS 7"
+                ;;
+            8)
+                echo "!!CentOS 8"
+                ;;
+            9)
+                echo "!!CentOS 9"
+                ;;
+            esac
             ;;
         *) 
             echo "Unknown Linux Distro: $NAME"
             ;;
         esac
-        echo $NAME
-        echo $VERSION_ID
     fi
     ;;
   'FreeBSD')
