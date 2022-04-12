@@ -17,10 +17,20 @@ pipeline {
                     }
                 }
                 stages {
+                    stage('Release') {
+                        agent any
+                        steps {
+                            sshagent(credentials : ['phaka']) {
+                                sh "ssh -o StrictHostKeyChecking=no phaka@${HOST} uname -s"
+                                sh "ssh -o StrictHostKeyChecking=no phaka@${HOST} uname -m"
+                            }
+                        }
+                    }
                     stage('Bootstrap') {
                         agent any
                         steps {
                             sshagent(credentials : ['phaka']) {
+                                sh "ssh -o StrictHostKeyChecking=no phaka@${HOST} uname"
                                 sh "scp -o StrictHostKeyChecking=no bootstrap.sh phaka@${HOST}:~/"
                                 sh "ssh -o StrictHostKeyChecking=no phaka@${HOST} chmod u+x bootstrap.sh"
                                 sh "ssh -o StrictHostKeyChecking=no phaka@${HOST} sudo ./bootstrap.sh"
