@@ -6,9 +6,9 @@ case $OS in
     echo "Linux"
     OS='Linux'
     if [ -f /etc/os-release ]; then
-        cat /etc/os-release
-        OS=$NAME
-        VER=$VERSION_ID
+        . /etc/os-release
+        echo $NAME
+        echo $VERSION_ID
     fi
     ;;
   'FreeBSD')
