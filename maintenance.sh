@@ -43,7 +43,7 @@ el9()  {
     dnf check-update -y
     retVal=$?
     if [ $retVal -eq 100 ]; then 
-        dnf upgrade -y
+        dnf upgrade --allowerasing -y
         shutdown -r +1
     else
         echo "System is up-to-date"
