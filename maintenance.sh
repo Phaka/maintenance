@@ -55,6 +55,11 @@ el8()  {
     el9
 }
 
+deb() {
+  apt update -y
+  apt upgrade -y
+}
+
 OS="`uname`"
 case $OS in
   'Linux')
@@ -63,6 +68,9 @@ case $OS in
     if [ -f /etc/os-release ]; then
         . /etc/os-release
         case $NAME in
+        Debian*)
+            deb
+            ;;
         CentOS*)
             case $VERSION_ID in
             5|6|7)

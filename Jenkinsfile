@@ -13,7 +13,7 @@ pipeline {
                 axes {
                     axis {
                         name 'HOST'
-                        values '192.168.128.249', '192.168.128.250'
+                        values '192.168.128.249', '192.168.128.245'
                     }
                 }
                 stages {
