@@ -17,33 +17,14 @@ pipeline {
                     }
                 }
                 stages {
-                    stage('Release') {
+                    stage('Maintenance') {
                         agent any
                         steps {
                             sshagent(credentials : ['phaka']) {
-                                sh "scp -o StrictHostKeyChecking=no sysinfo.sh phaka@${HOST}:~/"
-                                sh "ssh -o StrictHostKeyChecking=no phaka@${HOST} chmod u+x sysinfo.sh"
-                                sh "ssh -o StrictHostKeyChecking=no phaka@${HOST} sudo ./sysinfo.sh"
-                            }
-                        }
-                    }
-                    stage('Bootstrap') {
-                        agent any
-                        steps {
-                            sshagent(credentials : ['phaka']) {
-                                sh "scp -o StrictHostKeyChecking=no bootstrap.sh phaka@${HOST}:~/"
-                                sh "ssh -o StrictHostKeyChecking=no phaka@${HOST} chmod u+x bootstrap.sh"
-                                sh "ssh -o StrictHostKeyChecking=no phaka@${HOST} sudo ./bootstrap.sh"
-                            }
-                        }
-                    }
-                    stage('Patch') {
-                        agent any
-                        steps {
-                            sshagent(credentials : ['phaka']) {
-                                sh "scp -o StrictHostKeyChecking=no patch.sh phaka@${HOST}:~/"
-                                sh "ssh -o StrictHostKeyChecking=no phaka@${HOST} chmod u+x patch.sh"
-                                sh "ssh -o StrictHostKeyChecking=no phaka@${HOST} sudo ./patch.sh"
+                                sh "scp -o StrictHostKeyChecking=no maintenance.sh phaka@${HOST}:~/"
+                                sh "ssh -o StrictHostKeyChecking=no phaka@${HOST} chmod u+x maintenance.sh"
+                                sh "ssh -o StrictHostKeyChecking=no phaka@${HOST} sudo ./maintenance.sh"
+                                sh "ssh -o StrictHostKeyChecking=no phaka@${HOST} rm ./maintenance.sh"
                             }
                         }
                     }

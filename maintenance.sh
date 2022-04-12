@@ -1,9 +1,20 @@
 #!/bin/sh
 
 el7() {
+    # Cockpit
+    yum install cockpit -y
+    systemctl enable --now cockpit.socket
+    firewall-cmd --permanent --zone=public --add-service=cockpit
+    firewall-cmd --reload
+    
+    # Install Development Toolchains
     yum group install "Development Tools" -y
     yum install cmake -y
     yum install java-11-openjdk -y
+    rpm -Uvh https://packages.microsoft.com/config/centos/7/packages-microsoft-prod.rpm
+    yum install dotnet-sdk-6.0 -y
+    
+    # Patch
     yum check-update
     retVal=$?
     if [ $retVal -eq 100 ]; then 
@@ -15,9 +26,20 @@ el7() {
 }
 
 el9()  {
+    # Cockpit
+    dnf install cockpit -y
+    systemctl start cockpit.socket
+    systemctl enable cockpit.socket
+    firewall-cmd --permanent --add-service=cockpit
+    firewall-cmd --reload
+
+    # Ensure toolchains are installed
     dnf group install "Development Tools" -y
     dnf install cmake -y
     dnf install java-11-openjdk -y
+    dnf install dotnet-sdk-6.0 -y
+    
+    # Patch 
     dnf check-update -y
     retVal=$?
     if [ $retVal -eq 100 ]; then 
