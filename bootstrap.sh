@@ -1,5 +1,8 @@
 #!/bin/sh
 
+OS=`uname`
+
+
 # Create Jenkins user
 id -u jenkins >/dev/null 2>&1 || useradd -m jenkins
 echo 'jenkins:j3nK1ns!' | chpasswd
