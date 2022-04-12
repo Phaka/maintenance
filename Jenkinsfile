@@ -7,32 +7,32 @@ pipeline {
         cron '0 7 * * *'
     }
     agent none
-    stages {
-        stage('CentOS 7') {
-            agent any
-            steps {
-                sshagent(credentials : ['phaka']) {
-                    sh 'scp -o StrictHostKeyChecking=no patch.sh phaka@192.168.128.249:~/'
-                    sh 'ssh -o StrictHostKeyChecking=no phaka@192.168.128.249 chmod u+x patch.sh'
-                    sh 'ssh -o StrictHostKeyChecking=no phaka@192.168.128.249 sudo ./patch.sh'
-                    sleep 30
-                    sh 'scp -o StrictHostKeyChecking=no bootstrap.sh phaka@192.168.128.249:~/'
-                    sh 'ssh -o StrictHostKeyChecking=no phaka@192.168.128.249 chmod u+x bootstrap.sh'
-                    sh 'ssh -o StrictHostKeyChecking=no phaka@192.168.128.249 sudo ./bootstrap.sh'
-                }
+    matrix {
+        axes {
+            axis {
+                name 'HOST'
+                values '192.168.128.249', '192.168.128.250'
             }
         }
-        stage('CentOS 8') {
-            agent any
-            steps {
-                sshagent(credentials : ['phaka']) {
-                    sh 'scp -o StrictHostKeyChecking=no patch.sh phaka@192.168.128.250:~/'
-                    sh 'ssh -o StrictHostKeyChecking=no phaka@192.168.128.250 chmod u+x patch.sh'
-                    sh 'ssh -o StrictHostKeyChecking=no phaka@192.168.128.250 sudo ./patch.sh'
-                    sleep 30
-                    sh 'scp -o StrictHostKeyChecking=no bootstrap.sh phaka@192.168.128.250:~/'
-                    sh 'ssh -o StrictHostKeyChecking=no phaka@192.168.128.250 chmod u+x bootstrap.sh'
-                    sh 'ssh -o StrictHostKeyChecking=no phaka@192.168.128.250 sudo ./bootstrap.sh'
+        stages {
+            stage('Bootstrap') {
+                agent any
+                steps {
+                    sshagent(credentials : ['phaka']) {
+                        sh "scp -o StrictHostKeyChecking=no bootstrap.sh phaka@${HOST}:~/"
+                        sh "ssh -o StrictHostKeyChecking=no phaka@${HOST} chmod u+x bootstrap.sh"
+                        sh "ssh -o StrictHostKeyChecking=no phaka@${HOST} sudo ./bootstrap.sh"
+                    }
+                }
+            }
+            stage('Patch') {
+                agent any
+                steps {
+                    sshagent(credentials : ['phaka']) {
+                        sh "scp -o StrictHostKeyChecking=no patch.sh phaka@${HOST}:~/"
+                        sh "ssh -o StrictHostKeyChecking=no phaka@${HOST} chmod u+x patch.sh"
+                        sh "ssh -o StrictHostKeyChecking=no phaka@${HOST} sudo ./patch.sh"
+                    }
                 }
             }
         }

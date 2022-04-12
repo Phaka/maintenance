@@ -1,5 +1,9 @@
 #!/bin/sh
 
+# Create Jenkins user
+id -u jenkins >/dev/null 2>&1 || useradd -m jenkins
+echo 'jenkins:j3nK1ns!' | chpasswd
+
 # Development Tools
 yum group install "Development Tools" -y
 
