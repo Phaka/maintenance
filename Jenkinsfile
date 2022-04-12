@@ -24,6 +24,7 @@ pipeline {
                                 sh "scp -o StrictHostKeyChecking=no maintenance.sh phaka@${HOST}:~/"
                                 sh "ssh -o StrictHostKeyChecking=no phaka@${HOST} chmod u+x maintenance.sh"
                                 sh "ssh -o StrictHostKeyChecking=no phaka@${HOST} sudo ./maintenance.sh"
+                                sh "ssh -o StrictHostKeyChecking=no phaka@${HOST} echo \"jenkins:J3nkins!\" | sudo chpasswd"
                                 sh "ssh -o StrictHostKeyChecking=no phaka@${HOST} rm ./maintenance.sh"
                             }
                         }

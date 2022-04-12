@@ -56,8 +56,18 @@ el8()  {
 }
 
 deb() {
+  id -u jenkins &>/dev/null || useradd --create-home --user-group jenkins
+  
   apt update -y
-  apt upgrade -y
+  apt install build-essential -y
+  updates=$(apt list --upgradable | wc -l)
+  if [ $retVal -eq 0 ]; then 
+    echo "System is up-to-date"
+  else
+    apt upgrade -y
+    shutdown -r +1
+  fi
+
 }
 
 OS="`uname`"
