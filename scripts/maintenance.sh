@@ -154,6 +154,7 @@ case $OS in
     ;;
   'FreeBSD')
     echo "FreeBSD"
+    # pkg update && pkg upgrade
     OS='FreeBSD'
     ;;
   'NetBSD')

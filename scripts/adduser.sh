@@ -14,8 +14,15 @@ case $OS in
     echo "$USERNAME:$PASSWORD" | chpasswd
     ;;
   'FreeBSD')
-    echo "FreeBSD"
-    OS='FreeBSD'
+    if id -u "$user" >/dev/null 2>&1; then
+      echo '$USERNAME exists'
+    else
+      pw useradd $USERNAME 
+      mkdir -p /home/$USERNAME
+      pw groupadd $USERNAME -M $USERNAME 
+      chown -R $USERNAME:$USERNAME /home/$USERNAME
+    fi
+    echo "$USERNAME:$PASSWORD" | chpasswd
     ;;
   'NetBSD')
     echo "NetBSD"
