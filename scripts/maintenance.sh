@@ -55,9 +55,52 @@ el8()  {
 
 deb() {
   apt update -y
-  apt install build-essential -y
+  apt install -y build-essential openjdk-11-jdk dotnet-sdk-6.0
   apt upgrade -y
+}
 
+deb8() {
+  apt-get install -y wget
+
+  wget -O - https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.asc.gpg
+  mv microsoft.asc.gpg /etc/apt/trusted.gpg.d/
+  wget https://packages.microsoft.com/config/debian/8/prod.list
+  mv prod.list /etc/apt/sources.list.d/microsoft-prod.list
+  chown root:root /etc/apt/trusted.gpg.d/microsoft.asc.gpg
+  chown root:root /etc/apt/sources.list.d/microsoft-prod.list
+
+  apt-get update -y
+  apt-get install -y build-essential openjdk-11-jdk dotnet-sdk-2.1
+  apt-get upgrade -y
+}
+
+deb9() {
+  apt-get install -y wget
+  wget -O - https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.asc.gpg
+  mv microsoft.asc.gpg /etc/apt/trusted.gpg.d/
+  wget https://packages.microsoft.com/config/debian/9/prod.list
+  mv prod.list /etc/apt/sources.list.d/microsoft-prod.list
+  chown root:root /etc/apt/trusted.gpg.d/microsoft.asc.gpg
+  chown root:root /etc/apt/sources.list.d/microsoft-prod.list
+  deb
+}
+
+deb10() {
+  apt-get install -y wget
+  wget https://packages.microsoft.com/config/debian/10/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+  dpkg -i packages-microsoft-prod.deb
+  rm packages-microsoft-prod.deb
+  apt install -y apt-transport-https
+  deb
+}
+
+deb11() {
+  apt-get install -y wget
+  wget https://packages.microsoft.com/config/debian/11/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+  dpkg -i packages-microsoft-prod.deb
+  rm packages-microsoft-prod.deb
+  apt install -y apt-transport-https
+  deb
 }
 
 OS="`uname`"
@@ -69,7 +112,23 @@ case $OS in
         . /etc/os-release
         case $NAME in
         Debian*)
-            deb
+        case $VERSION_ID in
+            8)
+                deb8              
+                ;;
+            9)
+                deb9              
+                ;;
+            10)
+                deb10              
+                ;;  
+            11)
+                deb11              
+                ;;            
+            *)
+                echo "!!Debian Linux Not Supported"
+                ;;
+            esac
             ;;
         CentOS*)
             case $VERSION_ID in
