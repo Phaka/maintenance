@@ -6,7 +6,11 @@ PASSWORD=$2
 OS="`uname`"
 case $OS in
   'Linux')
-    id -u "$USERNAME" &>/dev/null || useradd --create-home --user-group "$USERNAME"
+    if id -u "$user" >/dev/null 2>&1; then
+      echo '$USERNAME exists'
+    else
+      useradd --create-home --user-group "$USERNAME"
+    fi
     echo "$USERNAME:$PASSWORD" | chpasswd
     ;;
   'FreeBSD')
