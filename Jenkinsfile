@@ -17,8 +17,7 @@ pipeline {
                     axis {
                         name   'HOST'
                         values '192.168.128.249',
-                                '192.168.128.245',
-                                '192.168.128.248'
+                                '192.168.128.245'
                     }
                 }
                 stages {
@@ -32,24 +31,24 @@ pipeline {
                                 sh "ssh -o StrictHostKeyChecking=no phaka@${HOST} sudo scripts/adduser.sh \$AGENT_USR \$AGENT_PSW"
                                 sh "ssh -o StrictHostKeyChecking=no phaka@${HOST} sudo scripts/maintenance.sh"
                             }
-                            dir('keys') {
-                                withCredentials([file(credentialsId: 'jenkins_rsa.pub', variable: 'user_pub'),
-                                                file(credentialsId: 'jenkins_rsa', variable: 'user')]) {
-                                    writeFile file: 'user.pub', text: readFile(user_pub)
-                                    writeFile file: 'user', text: readFile(user)
-                                }
-                                sshagent(credentials : ['agent']) {
-                                    sh "ssh-copy-id -f -i user \$AGENT_USR@${HOST}"
-                                }
-                                // withCredentials([file(credentialsId: 'jenkins_ed25519.pub', variable: 'user_pub'),
-                                //                 file(credentialsId: 'jenkins_ed25519', variable: 'user')]) {
-                                //     writeFile file: 'user.pub', text: readFile(user_pub)
-                                //     writeFile file: 'user', text: readFile(user)
-                                // }
-                                // sshagent(credentials : ['agent']) {
-                                //     sh "ssh-copy-id -f -i user \$AGENT_USR@${HOST}"
-                                // }
-                            }
+                            // dir('keys') {
+                            //     withCredentials([file(credentialsId: 'jenkins_rsa.pub', variable: 'user_pub'),
+                            //                     file(credentialsId: 'jenkins_rsa', variable: 'user')]) {
+                            //         writeFile file: 'user.pub', text: readFile(user_pub)
+                            //         writeFile file: 'user', text: readFile(user)
+                            //     }
+                            //     sshagent(credentials : ['agent']) {
+                            //         sh "ssh-copy-id -f -i user \$AGENT_USR@${HOST}"
+                            //     }
+                            //     // withCredentials([file(credentialsId: 'jenkins_ed25519.pub', variable: 'user_pub'),
+                            //     //                 file(credentialsId: 'jenkins_ed25519', variable: 'user')]) {
+                            //     //     writeFile file: 'user.pub', text: readFile(user_pub)
+                            //     //     writeFile file: 'user', text: readFile(user)
+                            //     // }
+                            //     // sshagent(credentials : ['agent']) {
+                            //     //     sh "ssh-copy-id -f -i user \$AGENT_USR@${HOST}"
+                            //     // }
+                            // }
                             sshagent(credentials : ['phaka']) {
                                 sh "ssh -o StrictHostKeyChecking=no phaka@${HOST} sudo scripts/reboot.sh"
                             }
