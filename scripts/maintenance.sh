@@ -104,7 +104,7 @@ deb11() {
 }
 
 freebsd() {
-  env PAGER=cat freebsd-update fetch
+  freebsd-update fetch --not-running-from-cron
   freebsd-update install
 }
 

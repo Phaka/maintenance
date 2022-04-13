@@ -7,7 +7,7 @@ OS="`uname`"
 case $OS in
   'Linux')
     if id -u "$user" >/dev/null 2>&1; then
-      echo '$USERNAME exists'
+      echo "$USERNAME exists"
     else
       useradd --create-home --user-group "$USERNAME"
     fi
@@ -15,7 +15,7 @@ case $OS in
     ;;
   'FreeBSD')
     if id -u "$USERNAME" >/dev/null 2>&1; then
-      echo '$USERNAME exists'
+      echo "$USERNAME exists"
     else
       pw useradd $USERNAME 
       mkdir -p /home/$USERNAME
