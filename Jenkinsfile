@@ -35,12 +35,17 @@ pipeline {
                             sshagent(credentials : ['phaka']) {
                                 sh "ssh -o StrictHostKeyChecking=no phaka@${HOST} rm -Rf scripts"
                                 sh "scp -rp -o StrictHostKeyChecking=no scripts phaka@${HOST}:~/"
-                                sh "scp -rp -o StrictHostKeyChecking=no keys phaka@${HOST}:~/"
                                 sh "ssh -o StrictHostKeyChecking=no phaka@${HOST} chmod u+x scripts/*.sh"
                                 sh "ssh -o StrictHostKeyChecking=no phaka@${HOST} sudo scripts/adduser.sh \$AGENT_USR \$AGENT_PSW"
-                                
-                                writeFile file: 'key/private.pub', text: readFile(my_private_key)
                                 sh "ssh -o StrictHostKeyChecking=no phaka@${HOST} sudo scripts/maintenance.sh"
+                            }
+                            sshagent(credentials : ['agent']) {
+                                dir('keys') {
+                                    sh "ssh-copy-id -i jenkins_rsa.pub \$AGENT_USR@${HOST}"
+                                    sh "ssh-copy-id -i jenkins_ed25519.pub \$AGENT_USR@${HOST}"
+                                }
+                            }
+                            sshagent(credentials : ['phaka']) {
                                 sh "ssh -o StrictHostKeyChecking=no phaka@${HOST} sudo scripts/reboot.sh"
                             }
                         }
