@@ -6,8 +6,7 @@ case $OS in
     shutdown -r +1
     ;;
   'FreeBSD')
-    echo "FreeBSD"
-    OS='FreeBSD'
+    shutdown -r +1
     ;;
   'NetBSD')
     echo "NetBSD"
