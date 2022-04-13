@@ -56,12 +56,8 @@ el8()  {
 deb() {
   apt update -y
   apt install build-essential -y
-  updates=$(apt list --upgradable | wc -l)
-  if [ "X$updates" -eq "X0" ]; then 
-    echo "System is up-to-date"
-  else
-    apt upgrade -y
-  fi
+  apt upgrade -y
+
 }
 
 OS="`uname`"
