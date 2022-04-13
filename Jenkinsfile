@@ -16,14 +16,21 @@ pipeline {
                 axes {
                     axis {
                         name   'HOST'
-                        values '192.168.128.249',
-                                '192.168.128.245',
-                                '192.168.128.248'
+                        values '192.168.128.249',   // CentOS 7
+                                '192.168.128.245',  // Debian 10 amd64
+                                '192.168.128.248',  // Debian 11 i386
+                                '192.168.128.252',  // FreeBSD 12 amd64
+                                '192.168.128.253',  // FreeBSD 12 i386
+                                '192.168.128.254',  // NetBSD 9.0 amd64
+                                '192.168.128.255',  // NetBSD 9.1 amd64
+                                '192.168.129.2'     // NetBSD 9.1 i386
                     }
                 }
                 stages {
                     stage('Maintenance') {
-                        agent any
+                        agent { 
+                            label 'maintenance'
+                        }
                         steps {
                             sshagent(credentials : ['phaka']) {
                                 sh "ssh -o StrictHostKeyChecking=no phaka@${HOST} cat /etc/os-release"
