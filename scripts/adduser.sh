@@ -14,7 +14,7 @@ case $OS in
     echo "$USERNAME:$PASSWORD" | chpasswd
     ;;
   'FreeBSD')
-    if id -u "$user" >/dev/null 2>&1; then
+    if id -u "$USERNAME" >/dev/null 2>&1; then
       echo '$USERNAME exists'
     else
       pw useradd $USERNAME 
@@ -22,7 +22,7 @@ case $OS in
       pw groupadd $USERNAME -M $USERNAME 
       chown -R $USERNAME:$USERNAME /home/$USERNAME
     fi
-    echo "$USERNAME:$PASSWORD" | chpasswd
+    # echo "$USERNAME:$PASSWORD" | chpasswd
     ;;
   'NetBSD')
     echo "NetBSD"
