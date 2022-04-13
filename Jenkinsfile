@@ -41,8 +41,8 @@ pipeline {
                             }
                             sshagent(credentials : ['agent']) {
                                 dir('keys') {
-                                    sh "ssh-copy-id -i jenkins_rsa.pub \$AGENT_USR@${HOST}"
-                                    sh "ssh-copy-id -i jenkins_ed25519.pub \$AGENT_USR@${HOST}"
+                                    sh "ssh-copy-id -f -i jenkins_rsa.pub \$AGENT_USR@${HOST}"
+                                    sh "ssh-copy-id -f -i jenkins_ed25519.pub \$AGENT_USR@${HOST}"
                                 }
                             }
                             sshagent(credentials : ['phaka']) {
