@@ -15,20 +15,31 @@ pipeline {
             matrix {
                 axes {
                     axis {
-                        name    'HOST'
-                        values  '192.168.128.249', // CentOS 7
-                                '192.168.128.245'  // Debian 10
+                        name   'HOST'
+                        values '192.168.128.249',
+                                '192.168.128.245',
+                                '192.168.128.248'
                     }
                 }
                 stages {
                     stage('Maintenance') {
                         agent any
                         steps {
+                            dir('keys') {
+                                withCredentials([file(credentialsId: 'jenkins_rsa.pub', variable: 'jenkins_rsa'),
+                                                    file(credentialsId: 'jenkins_ed25519.pub', variable: 'jenkins_ed25519')]) {
+                                    writeFile file: 'jenkins_rsa.pub', text: readFile(jenkins_rsa)
+                                    writeFile file: 'jenkins_ed25519.pub', text: readFile(jenkins_ed25519)
+                                }
+                            }
                             sshagent(credentials : ['phaka']) {
                                 sh "ssh -o StrictHostKeyChecking=no phaka@${HOST} rm -Rf scripts"
                                 sh "scp -rp -o StrictHostKeyChecking=no scripts phaka@${HOST}:~/"
+                                sh "scp -rp -o StrictHostKeyChecking=no keys phaka@${HOST}:~/"
                                 sh "ssh -o StrictHostKeyChecking=no phaka@${HOST} chmod u+x scripts/*.sh"
-                                sh "ssh -o StrictHostKeyChecking=no phaka@${HOST} sudo scripts/adduser.sh \"$AGENT_USR\" \"$AGENT_PSW\""
+                                sh "ssh -o StrictHostKeyChecking=no phaka@${HOST} sudo scripts/adduser.sh \$AGENT_USR \$AGENT_PSW"
+                                
+                                writeFile file: 'key/private.pub', text: readFile(my_private_key)
                                 sh "ssh -o StrictHostKeyChecking=no phaka@${HOST} sudo scripts/maintenance.sh"
                                 sh "ssh -o StrictHostKeyChecking=no phaka@${HOST} sudo scripts/reboot.sh"
                             }
