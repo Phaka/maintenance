@@ -57,7 +57,7 @@ deb() {
   apt update -y
   apt install build-essential -y
   updates=$(apt list --upgradable | wc -l)
-  if [ $retVal -eq 0 ]; then 
+  if [ $updates -eq 0 ]; then 
     echo "System is up-to-date"
   else
     apt upgrade -y
