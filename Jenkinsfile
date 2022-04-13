@@ -41,14 +41,14 @@ pipeline {
                                 sshagent(credentials : ['agent']) {
                                     sh "ssh-copy-id -f -i user \$AGENT_USR@${HOST}"
                                 }
-                                withCredentials([file(credentialsId: 'jenkins_ed25519.pub', variable: 'user_pub'),
-                                                file(credentialsId: 'jenkins_ed25519', variable: 'user')]) {
-                                    writeFile file: 'user.pub', text: readFile(user_pub)
-                                    writeFile file: 'user', text: readFile(user)
-                                }
-                                sshagent(credentials : ['agent']) {
-                                    sh "ssh-copy-id -f -i user \$AGENT_USR@${HOST}"
-                                }
+                                // withCredentials([file(credentialsId: 'jenkins_ed25519.pub', variable: 'user_pub'),
+                                //                 file(credentialsId: 'jenkins_ed25519', variable: 'user')]) {
+                                //     writeFile file: 'user.pub', text: readFile(user_pub)
+                                //     writeFile file: 'user', text: readFile(user)
+                                // }
+                                // sshagent(credentials : ['agent']) {
+                                //     sh "ssh-copy-id -f -i user \$AGENT_USR@${HOST}"
+                                // }
                             }
                             sshagent(credentials : ['phaka']) {
                                 sh "ssh -o StrictHostKeyChecking=no phaka@${HOST} sudo scripts/reboot.sh"
