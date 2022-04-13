@@ -32,11 +32,13 @@ pipeline {
                                 sh "ssh -o StrictHostKeyChecking=no phaka@${HOST} sudo scripts/maintenance.sh"
                             }
                             dir('keys') {
-                                withCredentials([file(credentialsId: 'jenkins_rsa.pub', variable: 'user_pub'),
-                                                file(credentialsId: 'jenkins_rsa', variable: 'user')]) {
-                                    writeFile file: 'user.pub', text: readFile(user_pub)
-                                    writeFile file: 'user', text: readFile(user)
+                                withCredentials([file(credentialsId: 'jenkins_rsa.pub', variable: 'my-private-key'),
+                                                file(credentialsId: 'jenkins_rsa', variable: 'my-public-key')]) {
+                                    sh "cp \$my-public-key jenkins_rsa.pub"
+                                    sh "cp \$my-private-key jenkins_rsa"
                                 }
+
+
                                 // sshagent(credentials : ['agent']) {
                                 //     sh "ssh-copy-id -f -i user \$AGENT_USR@${HOST}"
                                 // }
