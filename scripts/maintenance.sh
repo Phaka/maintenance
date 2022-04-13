@@ -103,6 +103,11 @@ deb11() {
   deb
 }
 
+freebsd() {
+  env PAGER=cat freebsd-update fetch
+  freebsd-update install
+}
+
 OS="`uname`"
 case $OS in
   'Linux')
@@ -154,8 +159,8 @@ case $OS in
     ;;
   'FreeBSD')
     echo "FreeBSD"
-    # pkg update && pkg upgrade
     OS='FreeBSD'
+    freebsd
     ;;
   'NetBSD')
     echo "NetBSD"
