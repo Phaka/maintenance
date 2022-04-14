@@ -55,19 +55,43 @@ el8()  {
 
 deb() {
   apt update -y
-  apt install -y build-essential openjdk-11-jdk dotnet-sdk-6.0
+  apt install -y build-essential openjdk-11-jdk 
+  ARCH=`arch`
+  echo $ARCH
+  case $ARCH in
+    i686|i386)    
+        ;;
+    x86_64)
+        apt install -y dotnet-sdk-6.0              
+        ;;      
+    *)
+        echo "!!Debian Linux Arch unknown"
+        ;;
+  esac
+  
   apt upgrade -y
 }
 
 deb8() {
   apt-get install -y wget
-
-  wget -O - https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.asc.gpg
-  mv microsoft.asc.gpg /etc/apt/trusted.gpg.d/
-  wget https://packages.microsoft.com/config/debian/8/prod.list
-  mv prod.list /etc/apt/sources.list.d/microsoft-prod.list
-  chown root:root /etc/apt/trusted.gpg.d/microsoft.asc.gpg
-  chown root:root /etc/apt/sources.list.d/microsoft-prod.list
+  ARCH=`arch`
+  echo $ARCH
+  case $ARCH in
+    i686|i386)    
+        ;;
+    x86_64)
+          wget -O - https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.asc.gpg
+          mv microsoft.asc.gpg /etc/apt/trusted.gpg.d/
+          wget https://packages.microsoft.com/config/debian/8/prod.list
+          mv prod.list /etc/apt/sources.list.d/microsoft-prod.list
+          chown root:root /etc/apt/trusted.gpg.d/microsoft.asc.gpg
+          chown root:root /etc/apt/sources.list.d/microsoft-prod.list          
+        ;;      
+    *)
+        echo "!!Debian Linux Arch unknown"
+        ;;
+  esac
+  
 
   apt-get update -y
   apt-get install -y build-essential openjdk-11-jdk dotnet-sdk-2.1
@@ -76,29 +100,61 @@ deb8() {
 
 deb9() {
   apt-get install -y wget
-  wget -O - https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.asc.gpg
-  mv microsoft.asc.gpg /etc/apt/trusted.gpg.d/
-  wget https://packages.microsoft.com/config/debian/9/prod.list
-  mv prod.list /etc/apt/sources.list.d/microsoft-prod.list
-  chown root:root /etc/apt/trusted.gpg.d/microsoft.asc.gpg
-  chown root:root /etc/apt/sources.list.d/microsoft-prod.list
+  ARCH=`arch`
+  echo $ARCH
+  case $ARCH in
+    i686|i386)    
+        ;;
+    x86_64)
+          wget -O - https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.asc.gpg
+          mv microsoft.asc.gpg /etc/apt/trusted.gpg.d/
+          wget https://packages.microsoft.com/config/debian/9/prod.list
+          mv prod.list /etc/apt/sources.list.d/microsoft-prod.list
+          chown root:root /etc/apt/trusted.gpg.d/microsoft.asc.gpg
+          chown root:root /etc/apt/sources.list.d/microsoft-prod.list          
+        ;;      
+    *)
+        echo "!!Debian Linux Arch unknown"
+        ;;
+  esac
   deb
 }
 
 deb10() {
   apt-get install -y wget
-  wget https://packages.microsoft.com/config/debian/10/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
-  dpkg -i packages-microsoft-prod.deb
-  rm packages-microsoft-prod.deb
+  ARCH=`arch`
+  echo $ARCH
+  case $ARCH in
+    i686|i386)    
+        ;;
+    x86_64)
+        wget https://packages.microsoft.com/config/debian/10/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+        dpkg -i packages-microsoft-prod.deb
+        rm packages-microsoft-prod.deb       
+        ;;      
+    *)
+        echo "!!Debian Linux Arch unknown"
+        ;;
+  esac
+
   apt install -y apt-transport-https
   deb
 }
 
 deb11() {
   apt-get install -y wget
-  wget https://packages.microsoft.com/config/debian/11/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
-  dpkg -i packages-microsoft-prod.deb
-  rm packages-microsoft-prod.deb
+case $ARCH in
+    i686|i386)    
+        ;;
+    x86_64)
+        wget https://packages.microsoft.com/config/debian/11/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+        dpkg -i packages-microsoft-prod.deb
+        rm packages-microsoft-prod.deb       
+        ;;      
+    *)
+        echo "!!Debian Linux Arch unknown"
+        ;;
+  esac
   apt install -y apt-transport-https
   deb
 }
