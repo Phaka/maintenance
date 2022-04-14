@@ -28,6 +28,9 @@ pipeline {
                 }
                 stages {
                     stage('Maintenance') {
+                        options {
+                            retry(3)
+                        }
                         agent { 
                             label 'maintenance'
                         }
