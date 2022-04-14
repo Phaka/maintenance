@@ -119,22 +119,23 @@ netbsd() {
   # export PKG_PATH
   pkg_add -v pkgin
   pkgin update
-  pkgin install patch 
-  pkgin install pkgconf 
-  pkgin install autoconf 
-  pkgin install automake 
-  pkgin install bash 
-  pkgin install bzip2 
-  pkgin install cmake 
-  pkgin install git 
-  pkgin install gmake 
-  pkgin install m4 
-  pkgin install meson 
-  pkgin install nasm 
-  pkgin install ninja-build 
-  pkgin install python37 
-  pkgin install gcc10 
-  pkgin install openjdk11
+  pkgin -y install sudo
+  pkgin -y install patch 
+  pkgin -y install pkgconf 
+  pkgin -y install autoconf 
+  pkgin -y install automake 
+  pkgin -y install bash 
+  pkgin -y install bzip2 
+  pkgin -y install cmake 
+  pkgin -y install git 
+  pkgin -y install gmake 
+  pkgin -y install m4 
+  pkgin -y install meson 
+  pkgin -y install nasm 
+  pkgin -y install ninja-build 
+  pkgin -y install python37 
+  pkgin -y install gcc10 
+  pkgin -y install openjdk11
 }
 
 OS="`uname`"
