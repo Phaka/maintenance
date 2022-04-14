@@ -27,10 +27,11 @@ case $OS in
   'NetBSD')
     echo "NetBSD"
     OS='NetBSD'
+    # When we execute the script using sudo over SSH, then some paths are missing
     if id -u "$user" >/dev/null 2>&1; then
       echo "$USERNAME exists"
-    else
-      useradd -m "$USERNAME"
+    else 
+      /usr/sbin/useradd -m "$USERNAME"
     fi
     # echo "$USERNAME:$PASSWORD" | chpasswd
     ;;
