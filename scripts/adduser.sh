@@ -27,6 +27,12 @@ case $OS in
   'NetBSD')
     echo "NetBSD"
     OS='NetBSD'
+    if id -u "$user" >/dev/null 2>&1; then
+      echo "$USERNAME exists"
+    else
+      useradd -m "$USERNAME"
+    fi
+    # echo "$USERNAME:$PASSWORD" | chpasswd
     ;;
   'OpenBSD')
     echo "OpenBSD"
