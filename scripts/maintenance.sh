@@ -115,7 +115,7 @@ freebsd() {
 }
 
 netbsd() {
-  pkg install -y pkgin
+  pkg_add pkgin
   pkgin install -y autoconf automake bash bzip2 cmake git gmake m4 meson nasm ninja-build patch pkgconf python37 gcc10 openjdk11
 }
 
