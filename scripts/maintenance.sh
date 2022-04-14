@@ -115,8 +115,11 @@ freebsd() {
 }
 
 netbsd() {
-  pkg_add pkgin
-  pkgin install -y autoconf automake bash bzip2 cmake git gmake m4 meson nasm ninja-build patch pkgconf python37 gcc10 openjdk11
+  PKG_PATH="https://cdn.NetBSD.org/pub/pkgsrc/packages/NetBSD/$(uname -p)/$(uname -r | cut -d_ -f1)/All"
+  export PKG_PATH
+  pkg_add -v pkgin
+  pkgin update
+  pkgin install autoconf automake bash bzip2 cmake git gmake m4 meson nasm ninja-build patch pkgconf python37 gcc10 openjdk11
 }
 
 OS="`uname`"
