@@ -105,6 +105,7 @@ deb11() {
 
 freebsd() {
   freebsd-update fetch --not-running-from-cron
+  freebsd-update updatesready --not-running-from-cron
   retVal=$?
   if [ $retVal -ne 2 ]; then
       freebsd-update install
