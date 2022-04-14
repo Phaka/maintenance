@@ -138,7 +138,7 @@ netbsd() {
   pkgin -y install openjdk11
   pkgin -y install sysupgrade
 
-  /usr/pkg/sbin/sysupgrade auto
+  /usr/pkg/sbin/sysupgrade auto -o AUTOCLEAN=no -o ETCUPDATE=no
 }
 
 OS="`uname`"
