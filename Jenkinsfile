@@ -36,6 +36,7 @@ pipeline {
                         }
                         steps {
                             sshagent(credentials : ['phaka']) {
+                                sh 'netstat -rn'
                                 sh "ssh -o StrictHostKeyChecking=no phaka@${HOST} uname -a"
                                 sh "ssh -o StrictHostKeyChecking=no phaka@${HOST} rm -Rf scripts"
                                 sh "scp -rp -o StrictHostKeyChecking=no scripts phaka@${HOST}:~/"
