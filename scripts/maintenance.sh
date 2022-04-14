@@ -114,6 +114,10 @@ freebsd() {
   fi
 }
 
+netbsd() {
+  pkgin install autoconf automake bash bzip2 cmake git gmake m4 meson nasm ninja-build patch pkgconf python37 gcc10 openjdk11
+}
+
 OS="`uname`"
 case $OS in
   'Linux')
@@ -171,6 +175,7 @@ case $OS in
   'NetBSD')
     echo "NetBSD"
     OS='NetBSD'
+    netbsd
     ;;
   'OpenBSD')
     echo "OpenBSD"
