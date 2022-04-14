@@ -104,6 +104,8 @@ deb11() {
 }
 
 freebsd() {
+  pkg install -y cmake
+  pkg install -y openjdk11
   freebsd-update fetch --not-running-from-cron
   freebsd-update updatesready --not-running-from-cron
   retVal=$?
