@@ -136,6 +136,9 @@ netbsd() {
   pkgin -y install python37 
   pkgin -y install gcc10 
   pkgin -y install openjdk11
+  pkgin -y install sysupgrade
+
+  sysupgrade auto
 }
 
 OS="`uname`"
