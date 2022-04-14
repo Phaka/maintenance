@@ -115,7 +115,8 @@ freebsd() {
 }
 
 netbsd() {
-  pkgin install autoconf automake bash bzip2 cmake git gmake m4 meson nasm ninja-build patch pkgconf python37 gcc10 openjdk11
+  pkg install -y pkgin
+  pkgin install -y autoconf automake bash bzip2 cmake git gmake m4 meson nasm ninja-build patch pkgconf python37 gcc10 openjdk11
 }
 
 OS="`uname`"
