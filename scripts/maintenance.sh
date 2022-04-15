@@ -203,24 +203,6 @@ openbsd_pkg_add() {
   echo "---"
 }
 
-openbsd_6_7() {
-  openbsd_pkg_add nano
-  openbsd_pkg_add gcc
-  openbsd_pkg_add git
-  openbsd_pkg_add automake 
-  openbsd_pkg_add bash 
-  openbsd_pkg_add bzip2 
-  openbsd_pkg_add gmake 
-  openbsd_pkg_add m4 
-  openbsd_pkg_add meson 
-  openbsd_pkg_add nasm 
-  openbsd_pkg_add ninja-build 
-  openbsd_pkg_add python37 
-  openbsd_pkg_add cmake
-  openbsd_pkg_add jdk-11.0.7.10.2p0v0
-  openbsd_pkg_add autoconf-2.69p2.tgz
-}
-
 openbsd_6_8() {
   openbsd_pkg_add nano
   openbsd_pkg_add gcc
@@ -233,7 +215,7 @@ openbsd_6_8() {
   openbsd_pkg_add meson 
   openbsd_pkg_add nasm 
   openbsd_pkg_add ninja-build 
-  openbsd_pkg_add python37 
+  openbsd_pkg_add python-3.8.6p1 
   openbsd_pkg_add cmake
   openbsd_pkg_add jdk-11.0.8.10.1v0.tgz
   openbsd_pkg_add autoconf-2.69p3.tgz
@@ -245,11 +227,8 @@ openbsd() {
     6.8)
         openbsd_6_8              
         ;;
-    6.7)
-        openbsd_6_7              
-        ;;         
     *)
-        echo "!!OpenBSD Not Supported"
+        echo "!!OpenBSD $VERSION Not Supported"
         ;;
     esac
 }
