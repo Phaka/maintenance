@@ -28,7 +28,7 @@ pipeline {
                                 '192.168.129.0',    // OpenBSD 6.7 amd64
                                 '192.168.129.5',    // OpenBSD 6.7 i386
                                 '192.168.129.1',    // OpenBSD 6.8 amd64
-                                '192.168.129.6',    // OpenBSD 6.8 amd64
+                                '192.168.129.6'    // OpenBSD 6.8 amd64
                     }
                 }
                 stages {
