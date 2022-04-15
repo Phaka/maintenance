@@ -44,7 +44,7 @@ pipeline {
                                 sh "ssh -o StrictHostKeyChecking=no phaka@${HOST} sudo scripts/adduser.sh \$AGENT_USR \$AGENT_PSW"
                                 sh "ssh -o StrictHostKeyChecking=no phaka@${HOST} sudo scripts/maintenance.sh"
                                 //sh "ssh -o StrictHostKeyChecking=no phaka@${HOST} sudo scripts/reboot.sh"
-                                sh "ssh -o StrictHostKeyChecking=no phaka@localhost -p 8022 help
+                                sh 'ssh -o StrictHostKeyChecking=no phaka@localhost -p 8022 help'
 
                             }
                         }
