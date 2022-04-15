@@ -225,7 +225,7 @@ openbsd_6_8() {
   openbsd_pkg_add nano
   openbsd_pkg_add gcc
   openbsd_pkg_add git
-  openbsd_pkg_add automake 
+  openbsd_pkg_add automake-1.4.6p5 
   openbsd_pkg_add bash 
   openbsd_pkg_add bzip2 
   openbsd_pkg_add gmake 
