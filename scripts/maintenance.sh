@@ -240,7 +240,7 @@ openbsd_6_8() {
 }
 
 openbsd() {
-  VERSION=`uname-r`
+  VERSION=`uname -r`
   case $VERSION in
     6.8)
         openbsd_6_8              
