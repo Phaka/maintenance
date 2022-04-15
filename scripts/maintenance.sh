@@ -246,7 +246,7 @@ openbsd() {
         openbsd_6_8              
         ;;
     6.7)
-        openbsd_6_9              
+        openbsd_6_7              
         ;;         
     *)
         echo "!!OpenBSD Not Supported"
