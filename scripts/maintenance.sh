@@ -197,6 +197,24 @@ netbsd() {
   # /usr/pkg/sbin/sysupgrade -o AUTOCLEAN=no -o ETCUPDATE=no auto 
 }
 
+openbsd() {
+  pkg_add -v nano
+  pkg_add -v gcc
+  pkg_add -v git
+  pkg_add -v jdk-11.0.7.10.2p0v0
+  pkg_add -y autoconf 
+  pkg_add -y automake 
+  pkg_add -y bash 
+  pkg_add -y bzip2 
+  pkg_add -y gmake 
+  pkg_add -y m4 
+  pkg_add -y meson 
+  pkg_add -y nasm 
+  pkg_add -y ninja-build 
+  pkg_add -y install python37 
+  pkg_add -v cmake
+}
+
 OS="`uname`"
 case $OS in
   'Linux')
@@ -259,6 +277,7 @@ case $OS in
   'OpenBSD')
     echo "OpenBSD"
     OS='OpenBSD'
+    openbsd
     ;;
   'WindowsNT')
     echo "Windows"

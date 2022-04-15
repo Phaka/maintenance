@@ -38,6 +38,12 @@ case $OS in
   'OpenBSD')
     echo "OpenBSD"
     OS='OpenBSD'
+    # When we execute the script using sudo over SSH, then some paths are missing
+    if getent passwd $USERNAME > /dev/null 2>&1; then
+      echo "$USERNAME exists"
+    else 
+      /usr/sbin/useradd -m "$USERNAME"
+    fi
     ;;
   'WindowsNT')
     echo "Windows"
