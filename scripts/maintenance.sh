@@ -197,24 +197,41 @@ netbsd() {
   # /usr/pkg/sbin/sysupgrade -o AUTOCLEAN=no -o ETCUPDATE=no auto 
 }
 
-openbsd() {
-  pkg_add -v nano
-  pkg_add -v gcc
-  pkg_add -v git
-  pkg_add -v jdk-11.0.7.10.2p0v0
-  pkg_add -v autoconf 
-  pkg_add -v automake 
-  pkg_add -v bash 
-  pkg_add -v bzip2 
-  pkg_add -v gmake 
-  pkg_add -v m4 
-  pkg_add -v meson 
-  pkg_add -v nasm 
-  pkg_add -v ninja-build 
-  pkg_add -v python37 
-  pkg_add -v cmake
+openbsd_pkg_add() {
+  echo "Installing \"$1\""
+  pkg_add -v $1
+  echo "---"
 }
 
+openbsd_6_7() {
+  openbsd_pkg_add jdk-11.0.7.10.2p0v0
+  openbsd_pkg_add autoconf-2.69p2.tgz
+}
+
+openbsd_6_8() {
+  openbsd_pkg_add jdk-11.0.8.10.1v0.tgz
+  openbsd_pkg_add autoconf-2.69p3.tgz
+}
+
+openbsd() {
+  openbsd_pkg_add nano
+  openbsd_pkg_add gcc
+  openbsd_pkg_add git
+  openbsd_pkg_add automake 
+  openbsd_pkg_add bash 
+  openbsd_pkg_add bzip2 
+  openbsd_pkg_add gmake 
+  openbsd_pkg_add m4 
+  openbsd_pkg_add meson 
+  openbsd_pkg_add nasm 
+  openbsd_pkg_add ninja-build 
+  openbsd_pkg_add python37 
+  openbsd_pkg_add cmake
+}
+
+echo "---------------------------------------------------------------------"
+uname -a
+echo "---------------------------------------------------------------------"
 OS="`uname`"
 case $OS in
   'Linux')
