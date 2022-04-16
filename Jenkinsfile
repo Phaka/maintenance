@@ -125,6 +125,16 @@ pipeline {
                         }
                     }
                 }
+                stage('OpenIndiana-20201031-amd64') {
+                    options {
+                        retry(3)
+                    }
+                    steps {
+                        sshagent(credentials : ['phaka']) {
+                            sh './bootstrap.sh 192.168.129.4'
+                        }
+                    }
+                }
                 // stage('RHEL-6.10-amd64') {
                 //     options {
                 //         retry(3)
