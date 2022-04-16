@@ -115,143 +115,153 @@ pipeline {
                         }
                     }
                 }
-                stage('RHEL-6.10-amd64') {
+                stage('MacOS-12.3-M1') {
                     options {
                         retry(3)
                     }
                     steps {
                         sshagent(credentials : ['phaka']) {
-                            sh './bootstrap.sh 192.168.129.20'
+                            sh './bootstrap.sh macmini.oak01.bloudraak.net'
                         }
                     }
                 }
-                stage('RHEL-7.9-amd64') {
-                    options {
-                        retry(3)
-                    }
-                    steps {
-                        sshagent(credentials : ['phaka']) {
-                            sh './bootstrap.sh 192.168.129.17'
-                        }
-                    }
-                }
-                stage('RHEL-8.5-amd64') {
-                    options {
-                        retry(3)
-                    }
-                    steps {
-                        sshagent(credentials : ['phaka']) {
-                            sh './bootstrap.sh 192.168.129.18'
-                        }
-                    }
-                }
-                stage('Solaris-11.4-amd64') {
-                    options {
-                        retry(3)
-                    }
-                    steps {
-                        sshagent(credentials : ['phaka']) {
-                            sh './bootstrap.sh 192.168.128.244'
-                        }
-                    }
-                }
-                stage('Ubuntu-16.04-i386') {
-                    options {
-                        retry(3)
-                    }
-                    steps {
-                        sshagent(credentials : ['phaka']) {
-                            sh './bootstrap.sh 192.168.128.247'
-                        }
-                    }
-                }
-                stage('Ubuntu-20.10-amd64') {
-                    options {
-                        retry(3)
-                    }
-                    steps {
-                        sshagent(credentials : ['phaka']) {
-                            sh './bootstrap.sh 192.168.128.163'
-                        }
-                    }
-                }
-                stage('WindowsServer-2003R2-amd64') {
-                    options {
-                        retry(3)
-                    }
-                    steps {
-                        sshagent(credentials : ['phaka']) {
-                            // sh "./bootstrap.sh 192.168.129.13"
-                            echo 'Hello World'
-                        }
-                    }
-                }
-                stage('WindowsServer-2003R2-i386') {
-                    options {
-                        retry(3)
-                    }
-                    steps {
-                        sshagent(credentials : ['phaka']) {
-                            // sh "./bootstrap.sh 192.168.129.14"
-                            echo 'Hello World'
-                        }
-                    }
-                }
-                stage('WindowsServer-2008R2-amd64') {
-                    options {
-                        retry(3)
-                    }
-                    steps {
-                        sshagent(credentials : ['phaka']) {
-                            // sh "./bootstrap.sh 192.168.129.15"
-                            echo 'Hello World'
-                        }
-                    }
-                }
-                stage('WindowsServer-2012R2-amd64') {
-                    options {
-                        retry(3)
-                    }
-                    steps {
-                        sshagent(credentials : ['phaka']) {
-                            // sh "./bootstrap.sh 192.168.129.11"
-                            echo 'Hello World'
-                        }
-                    }
-                }
-                stage('WindowsServer-2016-amd64') {
-                    options {
-                        retry(3)
-                    }
-                    steps {
-                        sshagent(credentials : ['phaka']) {
-                            // sh "./bootstrap.sh 192.168.129.10"
-                            echo 'Hello World'
-                        }
-                    }
-                }
-                stage('WindowsServer-2019-amd64') {
-                    options {
-                        retry(3)
-                    }
-                    steps {
-                        sshagent(credentials : ['phaka']) {
-                            // sh "./bootstrap.sh 192.168.129.9"
-                            echo 'Hello World'
-                        }
-                    }
-                }
-                stage('WindowsServer-2022-amd64') {
-                    options {
-                        retry(3)
-                    }
-                    steps {
-                        sshagent(credentials : ['phaka']) {
-                            // sh "./bootstrap.sh 192.168.129.16"
-                            echo 'Hello World'
-                        }
-                    }
-                }
+                // stage('RHEL-6.10-amd64') {
+                //     options {
+                //         retry(3)
+                //     }
+                //     steps {
+                //         sshagent(credentials : ['phaka']) {
+                //             sh './bootstrap.sh 192.168.129.20'
+                //         }
+                //     }
+                // }
+                // stage('RHEL-7.9-amd64') {
+                //     options {
+                //         retry(3)
+                //     }
+                //     steps {
+                //         sshagent(credentials : ['phaka']) {
+                //             sh './bootstrap.sh 192.168.129.17'
+                //         }
+                //     }
+                // }
+                // stage('RHEL-8.5-amd64') {
+                //     options {
+                //         retry(3)
+                //     }
+                //     steps {
+                //         sshagent(credentials : ['phaka']) {
+                //             sh './bootstrap.sh 192.168.129.18'
+                //         }
+                //     }
+                // }
+                // stage('Solaris-11.4-amd64') {
+                //     options {
+                //         retry(3)
+                //     }
+                //     steps {
+                //         sshagent(credentials : ['phaka']) {
+                //             sh './bootstrap.sh 192.168.128.244'
+                //         }
+                //     }
+                // }
+                // stage('Ubuntu-16.04-i386') {
+                //     options {
+                //         retry(3)
+                //     }
+                //     steps {
+                //         sshagent(credentials : ['phaka']) {
+                //             sh './bootstrap.sh 192.168.128.247'
+                //         }
+                //     }
+                // }
+                // stage('Ubuntu-20.10-amd64') {
+                //     options {
+                //         retry(3)
+                //     }
+                //     steps {
+                //         sshagent(credentials : ['phaka']) {
+                //             sh './bootstrap.sh 192.168.128.163'
+                //         }
+                //     }
+                // }
+                // stage('WindowsServer-2003R2-amd64') {
+                //     options {
+                //         retry(3)
+                //     }
+                //     steps {
+                //         sshagent(credentials : ['phaka']) {
+                //             // sh "./bootstrap.sh 192.168.129.13"
+                //             echo 'Hello World'
+                //         }
+                //     }
+                // }
+                // stage('WindowsServer-2003R2-i386') {
+                //     options {
+                //         retry(3)
+                //     }
+                //     steps {
+                //         sshagent(credentials : ['phaka']) {
+                //             // sh "./bootstrap.sh 192.168.129.14"
+                //             echo 'Hello World'
+                //         }
+                //     }
+                // }
+                // stage('WindowsServer-2008R2-amd64') {
+                //     options {
+                //         retry(3)
+                //     }
+                //     steps {
+                //         sshagent(credentials : ['phaka']) {
+                //             // sh "./bootstrap.sh 192.168.129.15"
+                //             echo 'Hello World'
+                //         }
+                //     }
+                // }
+                // stage('WindowsServer-2012R2-amd64') {
+                //     options {
+                //         retry(3)
+                //     }
+                //     steps {
+                //         sshagent(credentials : ['phaka']) {
+                //             // sh "./bootstrap.sh 192.168.129.11"
+                //             echo 'Hello World'
+                //         }
+                //     }
+                // }
+                // stage('WindowsServer-2016-amd64') {
+                //     options {
+                //         retry(3)
+                //     }
+                //     steps {
+                //         sshagent(credentials : ['phaka']) {
+                //             // sh "./bootstrap.sh 192.168.129.10"
+                //             echo 'Hello World'
+                //         }
+                //     }
+                // }
+                // stage('WindowsServer-2019-amd64') {
+                //     options {
+                //         retry(3)
+                //     }
+                //     steps {
+                //         sshagent(credentials : ['phaka']) {
+                //             // sh "./bootstrap.sh 192.168.129.9"
+                //             echo 'Hello World'
+                //         }
+                //     }
+                // }
+                // stage('WindowsServer-2022-amd64') {
+                //     options {
+                //         retry(3)
+                //     }
+                //     steps {
+                //         sshagent(credentials : ['phaka']) {
+                //             // sh "./bootstrap.sh 192.168.129.16"
+                //             echo 'Hello World'
+                //         }
+                //     }
+                // }
             }
         }
     }
