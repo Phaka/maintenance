@@ -160,6 +160,7 @@ case $ARCH in
 }
 
 freebsd() {
+  pkg install -y git
   pkg install -y cmake
   pkg install -y openjdk11
   freebsd-update fetch --not-running-from-cron
@@ -229,6 +230,22 @@ openbsd() {
         ;;
     *)
         echo "!!OpenBSD $VERSION Not Supported"
+        ;;
+    esac
+}
+
+darwin_12() {
+  sw_vers
+}
+
+darwin() {
+  VERSION=`sw_vers -productVersion`
+  case $VERSION in
+    12*)
+        darwin_12              
+        ;;
+    *)
+        echo "!!macOS $VERSION Not Supported"
         ;;
     esac
 }
@@ -307,6 +324,7 @@ case $OS in
   'Darwin') 
     echo "Darwin"
     OS='Darwin'
+    darwin()
     ;;
   'SunOS')
     echo "Solaris"
