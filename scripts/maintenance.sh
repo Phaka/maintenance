@@ -269,6 +269,10 @@ darwin() {
     esac
 }
 
+solaris() {
+  pkg install cmake
+}
+
 echo "---------------------------------------------------------------------"
 uname -a
 echo "---------------------------------------------------------------------"
@@ -348,6 +352,7 @@ case $OS in
   'SunOS')
     echo "Solaris"
     OS='Solaris'
+    solaris
     ;;
   'AIX') 
     echo "AIX"

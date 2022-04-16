@@ -60,6 +60,12 @@ case $OS in
   'SunOS')
     echo "Solaris"
     OS='Solaris'
+    if id -u "$user" >/dev/null 2>&1; then
+      echo "$USERNAME exists"
+    else
+      useradd -m "$USERNAME"
+    fi
+    # echo "$USERNAME:$PASSWORD" | chpasswd    
     ;;
   'AIX') 
     echo "AIX"
