@@ -271,6 +271,8 @@ darwin() {
 
 solaris() {
   pkg install cmake
+  pkg install openjdk11
+  pkg install git
 }
 
 echo "---------------------------------------------------------------------"
