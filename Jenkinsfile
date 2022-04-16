@@ -121,7 +121,7 @@ pipeline {
                     }
                     steps {
                         sshagent(credentials : ['phaka']) {
-                            sh './bootstrap.sh macmini.oak01.bloudraak.net'
+                            sh './bootstrap.sh 192.168.1.80'
                         }
                     }
                 }
