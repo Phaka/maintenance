@@ -52,7 +52,11 @@ case $OS in
   'Darwin') 
     echo "Darwin"
     OS='Darwin'
-    ;;
+    # dscl . -create /Users/username
+    # dscl . -create /Users/username UserShell /bin/bash
+    # dscl . -create /Users/username RealName "Jane Smith" 
+    # dscl . -passwd /Users/username password
+   ;;
   'SunOS')
     echo "Solaris"
     OS='Solaris'

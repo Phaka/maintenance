@@ -234,11 +234,30 @@ openbsd() {
     esac
 }
 
+brew_install() {
+    echo "\nInstalling $1"
+    if brew list $1 &>/dev/null; then
+        echo "${1} is already installed"
+    else
+        brew install $1 && echo "$1 is installed"
+    fi
+}
+
+
 darwin_12() {
   sw_vers
+  brew install -y cmake git
 }
 
 darwin() {
+  export NONINTERACTIVE=1
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  echo $(brew --prefix)
+  echo $(groups $(whoami))
+  dseditgroup -o edit -a $(whoami) -t user admin
+  chgrp -R admin $(brew --prefix) 
+  chmod -R g+rwX $(brew --prefix)
+  ls -lah $(brew --prefix)
   VERSION=`sw_vers -productVersion`
   case $VERSION in
     12*)
