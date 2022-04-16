@@ -25,7 +25,8 @@ pipeline {
                                 '192.168.128.255',  // NetBSD 9.1 amd64
                                 '192.168.129.2',    // NetBSD 9.1 i386
                                 '192.168.129.1',    // OpenBSD 6.8 amd64
-                                '192.168.129.6'     // OpenBSD 6.8 amd64
+                                '192.168.129.6',    // OpenBSD 6.8 amd64
+                                '192.168.1.79'      // MacOS 12 M1
                     }
                 }
                 stages {
@@ -38,13 +39,7 @@ pipeline {
                         }
                         steps {
                             sshagent(credentials : ['phaka']) {
-                                sh "ssh -o StrictHostKeyChecking=no phaka@${HOST} uname -a"
-                                sh "ssh -o StrictHostKeyChecking=no phaka@${HOST} rm -Rf scripts"
-                                sh "scp -rp -o StrictHostKeyChecking=no scripts phaka@${HOST}:~/"
-                                sh "ssh -o StrictHostKeyChecking=no phaka@${HOST} chmod u+x scripts/*.sh"
-                                sh "ssh -o StrictHostKeyChecking=no phaka@${HOST} sudo scripts/adduser.sh \$AGENT_USR \$AGENT_PSW"
-                                sh "ssh -o StrictHostKeyChecking=no phaka@${HOST} sudo scripts/maintenance.sh"
-                                //sh "ssh -o StrictHostKeyChecking=no phaka@${HOST} sudo scripts/reboot.sh"
+                                sh "./bootstrap.sh ${HOST}"
                             }
                         }
                     }
