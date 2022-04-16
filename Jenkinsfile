@@ -135,66 +135,66 @@ pipeline {
                         }
                     }
                 }
-                // stage('RHEL-6.10-amd64') {
-                //     options {
-                //         retry(3)
-                //     }
-                //     steps {
-                //         sshagent(credentials : ['phaka']) {
-                //             sh './bootstrap.sh 192.168.129.20'
-                //         }
-                //     }
-                // }
-                // stage('RHEL-7.9-amd64') {
-                //     options {
-                //         retry(3)
-                //     }
-                //     steps {
-                //         sshagent(credentials : ['phaka']) {
-                //             sh './bootstrap.sh 192.168.129.17'
-                //         }
-                //     }
-                // }
-                // stage('RHEL-8.5-amd64') {
-                //     options {
-                //         retry(3)
-                //     }
-                //     steps {
-                //         sshagent(credentials : ['phaka']) {
-                //             sh './bootstrap.sh 192.168.129.18'
-                //         }
-                //     }
-                // }
-                // stage('Solaris-11.4-amd64') {
-                //     options {
-                //         retry(3)
-                //     }
-                //     steps {
-                //         sshagent(credentials : ['phaka']) {
-                //             sh './bootstrap.sh 192.168.128.244'
-                //         }
-                //     }
-                // }
-                // stage('Ubuntu-16.04-i386') {
-                //     options {
-                //         retry(3)
-                //     }
-                //     steps {
-                //         sshagent(credentials : ['phaka']) {
-                //             sh './bootstrap.sh 192.168.128.247'
-                //         }
-                //     }
-                // }
-                // stage('Ubuntu-20.10-amd64') {
-                //     options {
-                //         retry(3)
-                //     }
-                //     steps {
-                //         sshagent(credentials : ['phaka']) {
-                //             sh './bootstrap.sh 192.168.128.163'
-                //         }
-                //     }
-                // }
+                stage('RHEL-6.10-amd64') {
+                    options {
+                        retry(3)
+                    }
+                    steps {
+                        sshagent(credentials : ['phaka']) {
+                            sh './bootstrap.sh 192.168.129.20'
+                        }
+                    }
+                }
+                stage('RHEL-7.9-amd64') {
+                    options {
+                        retry(3)
+                    }
+                    steps {
+                        sshagent(credentials : ['phaka']) {
+                            sh './bootstrap.sh 192.168.129.17'
+                        }
+                    }
+                }
+                stage('RHEL-8.5-amd64') {
+                    options {
+                        retry(3)
+                    }
+                    steps {
+                        sshagent(credentials : ['phaka']) {
+                            sh './bootstrap.sh 192.168.129.18'
+                        }
+                    }
+                }
+                stage('Solaris-11.4-amd64') {
+                    options {
+                        retry(3)
+                    }
+                    steps {
+                        sshagent(credentials : ['phaka']) {
+                            sh './bootstrap.sh 192.168.128.244'
+                        }
+                    }
+                }
+                stage('Ubuntu-16.04-i386') {
+                    options {
+                        retry(3)
+                    }
+                    steps {
+                        sshagent(credentials : ['phaka']) {
+                            sh './bootstrap.sh 192.168.128.247'
+                        }
+                    }
+                }
+                stage('Ubuntu-20.10-amd64') {
+                    options {
+                        retry(3)
+                    }
+                    steps {
+                        sshagent(credentials : ['phaka']) {
+                            sh './bootstrap.sh 192.168.128.163'
+                        }
+                    }
+                }
                 // stage('WindowsServer-2003R2-amd64') {
                 //     options {
                 //         retry(3)
