@@ -269,10 +269,18 @@ darwin() {
     esac
 }
 
+solaris_pkg_install() {
+  pkg install $1
+  retVal=$?
+  if [ $retVal -eq 4 ]; then 
+      echo "Package Already Exists"
+  fi
+}
+
 solaris() {
-  pkg install cmake
-  pkg install openjdk11
-  pkg install git
+  solaris_pkg_install cmake
+  solaris_pkg_install openjdk11
+  solaris_pkg_install git
 }
 
 echo "---------------------------------------------------------------------"
