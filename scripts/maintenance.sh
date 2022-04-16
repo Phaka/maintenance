@@ -250,23 +250,23 @@ darwin_12() {
 }
 
 darwin() {
-  export NONINTERACTIVE=1
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  echo $(brew --prefix)
-  echo $(groups $(whoami))
-  dseditgroup -o edit -a $(whoami) -t user admin
-  chgrp -R admin $(brew --prefix) 
-  chmod -R g+rwX $(brew --prefix)
-  ls -lah $(brew --prefix)
-  VERSION=`sw_vers -productVersion`
-  case $VERSION in
-    12*)
-        darwin_12              
-        ;;
-    *)
-        echo "!!macOS $VERSION Not Supported"
-        ;;
-    esac
+  # export NONINTERACTIVE=1
+  # sudo -H -u phaka /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  # echo $(brew --prefix)
+  # echo $(groups $(whoami))
+  # dseditgroup -o edit -a $(whoami) -t user admin
+  # chgrp -R admin $(brew --prefix) 
+  # chmod -R g+rwX $(brew --prefix)
+  # ls -lah $(brew --prefix)
+  # VERSION=`sw_vers -productVersion`
+  # case $VERSION in
+  #   12*)
+  #       darwin_12              
+  #       ;;
+  #   *)
+  #       echo "!!macOS $VERSION Not Supported"
+  #       ;;
+  #   esac
 }
 
 echo "---------------------------------------------------------------------"
