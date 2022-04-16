@@ -270,6 +270,7 @@ darwin() {
 }
 
 solaris_pkg_install() {
+  echo "Installing \"$1\""
   pkg install $1
   retVal=$?
   if [ $retVal -eq 4 ]; then 
