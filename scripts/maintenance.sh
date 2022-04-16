@@ -55,7 +55,7 @@ el8()  {
 
 deb() {
   apt update -y
-  apt install -y build-essential openjdk-11-jdk 
+  apt install -y build-essential git cmake openjdk-11-jdk 
   ARCH=`arch`
   echo $ARCH
   case $ARCH in
