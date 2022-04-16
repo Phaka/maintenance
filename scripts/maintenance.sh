@@ -324,7 +324,7 @@ case $OS in
   'Darwin') 
     echo "Darwin"
     OS='Darwin'
-    darwin()
+    darwin
     ;;
   'SunOS')
     echo "Solaris"
