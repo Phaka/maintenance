@@ -290,6 +290,21 @@ solaris() {
   solaris_pkg_install git
 }
 
+rhel6() {
+  yum group install -y "Development Tools"
+  yum install -y java-11-openjdk-devel git cmake
+}
+
+rhel7() {
+  yum group install -y "Development Tools"
+  yum install -y java-11-openjdk-devel git cmake
+}
+
+rhel8() {
+  dnf group install "Development Tools"
+  dnf install -y java-11-openjdk-devel git cmake
+}
+
 echo "---------------------------------------------------------------------"
 uname -a
 echo "---------------------------------------------------------------------"
@@ -343,7 +358,26 @@ case $OS in
             echo "Unknown Linux Distro: $NAME"
             ;;
         esac
+    elif [ -f /etc/redhat-release ]; then
+      VERSION_ID=`uname -r | sed 's/^.*\(el[0-9]\+\).*$/\1/'`
+      case $VERSION_ID in
+            el6)
+                rhel6              
+                ;;
+            el7)
+                rhel7              
+                ;;
+            el8)
+                rhel9              
+                ;;            
+            *)
+                echo "!!Red Hat Linux $VERSION_ID Not Supported"
+                ;;
+            esac
+            ;;
+      yum install -y java-11-openjdk git cmake
     fi
+    
     ;;
   'FreeBSD')
     echo "FreeBSD"
