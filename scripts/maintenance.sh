@@ -355,6 +355,19 @@ case $OS in
                 ;;
             esac
             ;;
+        RedHat*)
+            case $VERSION_ID in
+            7*)
+                rhel7
+                ;;
+            8*)
+                rhel8              
+                ;;
+            *)
+                echo "!!Red Hat Linux $VERSION_ID Not Supported"
+                ;;
+            esac
+            ;;
         *) 
             echo "Unknown Linux Distro: $NAME"
             ;;
