@@ -9,6 +9,7 @@ case $OS in
     if id -u "$user" >/dev/null 2>&1; then
       echo "$USERNAME exists"
     else
+      echo "Creating user $USERNAME"
       useradd --create-home --user-group "$USERNAME"
     fi
     echo "$USERNAME:$PASSWORD" | chpasswd
