@@ -279,6 +279,7 @@ solaris_pkg_install() {
 }
 
 solaris() {
+  pkg update --accept
   solaris_pkg_install cmake
   solaris_pkg_install openjdk11
   solaris_pkg_install git
