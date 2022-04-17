@@ -362,21 +362,19 @@ case $OS in
     elif [ -f /etc/redhat-release ]; then
       VERSION_ID=`uname -r | sed 's/^.*\(el[0-9]\+\).*$/\1/'`
       case $VERSION_ID in
-            el6)
-                rhel6              
-                ;;
-            el7)
-                rhel7              
-                ;;
-            el8)
-                rhel9              
-                ;;            
-            *)
-                echo "!!Red Hat Linux $VERSION_ID Not Supported"
-                ;;
-            esac
-            ;;
-      yum install -y java-11-openjdk git cmake
+      el6)
+          rhel6              
+          ;;
+      el7)
+          rhel7              
+          ;;
+      el8)
+          rhel9              
+          ;;            
+      *)
+          echo "!!Red Hat Linux $VERSION_ID Not Supported"
+          ;;
+      esac
     fi
     
     ;;
