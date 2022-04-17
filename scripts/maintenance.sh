@@ -166,6 +166,12 @@ ubuntu() {
 }
 
 freebsd() {
+  if [-d /usr/ports]; then
+    portsnap fetch update
+    portsnap extract
+    cd /usr/ports/editors/nano && make install clean BATCH=yes
+    cd /usr/ports/security/sudo && make install clean BATCH=yes
+  fi 
   pkg install -y git
   pkg install -y cmake
   pkg install -y openjdk11
@@ -175,6 +181,14 @@ freebsd() {
   if [ $retVal -ne 2 ]; then
       freebsd-update install
   fi
+}
+
+opensuse() {
+  zypper refresh
+  zypper install -y nano
+  zypper install -y cmake
+  zypper install -y -t pattern devel_basis
+  zypper install -y -t pattern devel_C_C++
 }
 
 netbsd() {
@@ -429,3 +443,33 @@ case $OS in
     OS='Unkown'
   ;;
 esac
+
+
+# if [ -f /etc/debian_version ]; then
+# apt-get update && apt-get -y upgrade
+# apt-get -y install qemu-kvm libvirt-dev virtinst virt-viewer libguestfs-tools virt-manager uuid-runtime curl linux-source libosinfo-bin
+# virsh net-start default
+# virsh net-autostart default
+# elif [ -f /etc/redhat-release ]; then
+# yum -y install epel-release
+# yum -y upgrade
+# yum -y group install "Virtualization Host"
+# yum -y install virt-manager libvirt virt-install qemu-kvm xauth dejavu-lgc-sans-fonts virt-top libguestfs-tools virt-viewer virt-manager curl
+# ln -s /usr/libexec/qemu-kvm /usr/bin/qemu-system-x86_64
+# fi
+
+# Packer
+# yum -y install wget unzip || apt update && apt -y install wget unzip
+# latest=$(curl -L -s https://releases.hashicorp.com/packer | grep 'packer_' | sed 's/^.*<.*\">packer_\(.*\)<\/a>/\1/' | head -1)
+# wget https://releases.hashicorp.com/packer/${latest}/packer_${latest}_linux_amd64.zip
+# unzip packer*.zip
+# chmod +x packer
+# mv packer /usr/local/bin/
+
+# curl -fsSL https://get.docker.com -o get-docker.sh && sh get-docker.sh
+# if [ -f /etc/debian_version ]; then
+# apt-get update && apt-get -y install python3-pip
+# elif [ -f /etc/redhat-release ]; then
+# yum -y install python3-pip
+# fi
+# pip3 install docker-compose

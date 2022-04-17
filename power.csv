@@ -1,0 +1,10 @@
+Host,Name
+192.168.129.48,freebsd13-ppc64-01
+192.168.129.47,opensuse15_3-ppc64le-01
+192.168.129.45,debian11-ppc64le-01
+192.168.129.43,ubuntu-20.04-ppc64el
+192.168.129.49,centos8-ppc64le-01
+192.168.129.54,centos7-ppc64-01
+192.168.129.55,centos7-ppc64le-01
+192.168.129.52,freebsd13-ppc64le-01
+192.168.129.35,talos01

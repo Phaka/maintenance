@@ -185,6 +185,86 @@ pipeline {
                         }
                     }
                 }
+                stage('freebsd13-ppc64-01') {
+                    options {
+                        retry(3)
+                    }
+                    steps {
+                        sshagent(credentials : ['phaka']) {
+                            sh './bootstrap.sh 192.168.129.48'
+                        }
+                    }
+                }
+                stage('opensuse15_3-ppc64le-01') {
+                    options {
+                        retry(3)
+                    }
+                    steps {
+                        sshagent(credentials : ['phaka']) {
+                            sh './bootstrap.sh 192.168.129.47'
+                        }
+                    }
+                }
+                stage('debian11-ppc64le-01') {
+                    options {
+                        retry(3)
+                    }
+                    steps {
+                        sshagent(credentials : ['phaka']) {
+                            sh './bootstrap.sh 192.168.129.45'
+                        }
+                    }
+                }
+                stage('ubuntu-20.04-ppc64el') {
+                    options {
+                        retry(3)
+                    }
+                    steps {
+                        sshagent(credentials : ['phaka']) {
+                            sh './bootstrap.sh 192.168.129.43'
+                        }
+                    }
+                }
+                stage('centos7-ppc64-01') {
+                    options {
+                        retry(3)
+                    }
+                    steps {
+                        sshagent(credentials : ['phaka']) {
+                            sh './bootstrap.sh 192.168.129.54'
+                        }
+                    }
+                }
+                stage('centos7-ppc64le-01') {
+                    options {
+                        retry(3)
+                    }
+                    steps {
+                        sshagent(credentials : ['phaka']) {
+                            sh './bootstrap.sh 192.168.129.55'
+                        }
+                    }
+                }
+                stage('freebsd13-ppc64le-01') {
+                    options {
+                        retry(3)
+                    }
+                    steps {
+                        sshagent(credentials : ['phaka']) {
+                            sh './bootstrap.sh 192.168.129.52'
+                        }
+                    }
+                }
+                stage('kvm01-ppc64el') {
+                    options {
+                        retry(3)
+                    }
+                    steps {
+                        sshagent(credentials : ['phaka']) {
+                            sh './bootstrap.sh 192.168.129.35'
+                        }
+                    }
+                }
                 // stage('WindowsServer-2003R2-amd64') {
                 //     options {
                 //         retry(3)
