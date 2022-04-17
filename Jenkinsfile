@@ -185,16 +185,6 @@ pipeline {
                         }
                     }
                 }
-                stage('Ubuntu-20.10-amd64') {
-                    options {
-                        retry(3)
-                    }
-                    steps {
-                        sshagent(credentials : ['phaka']) {
-                            sh './bootstrap.sh 192.168.128.163'
-                        }
-                    }
-                }
                 // stage('WindowsServer-2003R2-amd64') {
                 //     options {
                 //         retry(3)
