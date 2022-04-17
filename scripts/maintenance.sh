@@ -160,7 +160,8 @@ case $ARCH in
 }
 
 ubuntu() {
-  apt-get install -y wget
+  add-apt-repository -y ppa:openjdk-r/ppa
+  apt update -qq
   apt install -y apt-transport-https build-essential git cmake openjdk-11-jdk 
 }
 
