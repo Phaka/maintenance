@@ -159,6 +159,11 @@ case $ARCH in
   deb
 }
 
+ubuntu() {
+  apt-get install -y wget
+  apt install -y apt-transport-https build-essential git cmake openjdk-11-jdk 
+}
+
 freebsd() {
   pkg install -y git
   pkg install -y cmake
@@ -296,6 +301,9 @@ case $OS in
     if [ -f /etc/os-release ]; then
         . /etc/os-release
         case $NAME in
+        Ubuntu*)
+            ubuntu
+            ;;
         Debian*)
         case $VERSION_ID in
             8)
