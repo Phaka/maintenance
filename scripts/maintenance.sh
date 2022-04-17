@@ -355,7 +355,7 @@ case $OS in
                 ;;
             esac
             ;;
-        RedHat*)
+        Red*)
             case $VERSION_ID in
             7*)
                 rhel7
